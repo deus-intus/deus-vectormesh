@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "deus-vectormesh"
+version = "0.1.0"
+description = "Zero-dependency local in-memory vector database based on expired Kademlia DHT routing (US6944673B2)."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+    { name = "Deus Intus Ltd", email = "engineering@deusintus.com" }
+]
+keywords = ["vector-database", "kademlia", "dht", "embeddings", "local-first", "mcp"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence"
+]
+
+[project.urls]
+Homepage = "https://github.com/deus-intus/deus-vectormesh"
+Commercial = "https://deusintus.co.uk/solutions/vectormesh"
