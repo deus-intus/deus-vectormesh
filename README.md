@@ -1,84 +1,95 @@
+<div align="center">
+
+```
+  ____  _____ _   _ ____    ___ _   _ _____ _   _ ____  
+ |  _ \| ____| | | / ___|  |_ _| \ | |_   _| | | / ___| 
+ | | | |  _| | | | \___ \   | ||  \| | | | | | | \___ \ 
+ | |_| | |___| |_| |___) |  | || |\  | | | | |_| |___) |
+ |____/|_____|\___/|____/  |___|_| \_| |_|  \___/|____/ 
+```
+
+### **TECHNOLOGY · PEOPLE · A HIGHER TOMORROW**
+**DEUS INTUS // DEVELOPER ARM** — *Brand System v1.0*  
+*Digital systems, products, and infrastructure.*
+
+---
+</div>
+
+> **Elevator Line:** *"We build intelligent systems, products, and infrastructure that help ideas become operational reality."*
+
 # ⚡ Deus VectorMesh (`deus-vectormesh`)
-**Zero-dependency, local in-memory vector database based on statutory public domain Kademlia DHT routing.**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
-[![Statutory Status: Public Domain](https://img.shields.io/badge/Statutory%20IP-Expired%20Public%20Domain-brightgreen.svg)](https://patents.google.com/patent/US6944673B2/en)
+> **Zero-dependency, local in-memory vector database based on statutory public domain Kademlia DHT routing.**
 
----
-
-## 🏛️ The Algorithmic Origin: 2004 Math Meets 2026 Silicon
-
-Under **35 U.S.C. § 154(a)(2)**, utility patents have a statutory term of exactly 20 years from filing. Foundational distributed hash table and routing patents filed in 2004 reached statutory public domain expiration in late 2024.
-
-`deus-vectormesh` resurrects the mathematical core of **US Patent 6,944,673 B2** (*"Method and system for distributed hash table routing in fault-tolerant peer-to-peer networks"*, filed Nov 19, 2004, expired Nov 19, 2024).
-
-In 2004, sharding high-dimensional vectors across distributed nodes choked on single-core 32-bit Pentium chips and 100 Mbps Ethernet. In 2026, executing these XOR-distance metric trees directly in unified memory delivers **sub-microsecond local semantic search with zero cloud dependencies, zero external database servers, and zero API costs.**
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-0A57D6.svg)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-33CFFF.svg)](https://opensource.org/licenses/MIT)
+[![Zero Dependencies](https://img.shields.io/badge/dependencies-0%20(pure%20stdlib)-33CFFF.svg)](#)
+[![Model Agnostic](https://img.shields.io/badge/AI-Model%20Agnostic-031B4E.svg)](./AGENT_SETUP.md)
+[![Jupyter Notebook](https://img.shields.io/badge/Jupyter-Walkthrough%20Notebook-EAF4FF.svg)](./walkthrough.ipynb)
 
 ---
 
-## 🚀 Quickstart
+## 1. What This Is
+Deus VectorMesh is a high-velocity, in-memory vector database implemented entirely in pure Python standard library. It requires zero third-party packages, zero C-extensions, and zero cloud API keys, providing sub-millisecond semantic search and vector routing on any machine.
 
-### 1. Installation
-Zero external dependencies. Pure standard-library Python.
+## 2. Who It Is For
+- **AI Agent Engineers:** Integrating local vector memory into autonomous agents with zero external pip dependencies.
+- **Edge & Embedded Developers:** Deploying semantic search in resource-constrained environments where external vector databases cannot run.
+- **Privacy-First Organizations:** Running local RAG (Retrieval-Augmented Generation) with absolute data sovereignty.
+
+## 3. Current Status
+**Production / Standalone Sovereign Package.** Fully verified across Python 3.9+ with comprehensive unit test coverage.
+
+## 4. What Works Now vs Planned
+### What Works Now:
+- Pure Python vector indexing and exact cosine similarity calculation.
+- Sub-millisecond top-$k$ nearest neighbor retrieval.
+- Arbitrary document metadata attachment and payload filtering.
+- 1-Click quickstart execution via `python3 quickstart.py`.
+- Interactive Jupyter Notebook walkthrough in [`walkthrough.ipynb`](./walkthrough.ipynb).
+- Universal model-agnostic agent schemas in [`AGENT_SETUP.md`](./AGENT_SETUP.md).
+
+### Planned:
+- Persistent disk-backed append log serialization.
+
+## 5. How to View or Use It (30-Second Quickstart)
+No installation required! Simply clone and run:
+
 ```bash
-pip install -e .
-```
-Or simply copy `module.py` directly into your project!
+# 1. Clone the repository
+git clone https://github.com/deus-intus/deus-vectormesh.git
+cd deus-vectormesh
 
-### 2. Basic Python Usage
-```python
-from module import DeusVectorMesh
+# 2. Run the 1-click quickstart (zero dependencies)
+python3 quickstart.py
 
-# Initialize a 4-shard in-memory vector mesh
-mesh = DeusVectorMesh(num_shards=4)
-
-# Insert vectors with arbitrary metadata
-mesh.insert("doc_1", [0.95, 0.10, 0.05], {"title": "Autonomous Operating Systems"})
-mesh.insert("doc_2", [0.12, 0.88, 0.05], {"title": "Culinary Baking Techniques"})
-mesh.insert("doc_3", [0.89, 0.15, 0.08], {"title": "Local Neural Model Deployment"})
-
-# Query nearest neighbors using cosine similarity across sharded clusters
-results = mesh.search([1.0, 0.0, 0.0], top_k=2)
-
-for vector_id, score, meta in results:
-    print(f"[{score:.4f}] {vector_id} -> {meta['title']}")
+# 3. Run the unit test suite
+python3 -m unittest test_module.py
 ```
 
-Output:
-```
-[0.9939] doc_1 -> Autonomous Operating Systems
-[0.9859] doc_3 -> Local Neural Model Deployment
-```
+## 6. What Is in the Repository
+- `module.py` — Core `DeusVectorMesh` engine and cosine distance functions.
+- `quickstart.py` — 30-second runnable demo script.
+- `walkthrough.ipynb` — Interactive visual Jupyter Notebook walkthrough.
+- `AGENT_SETUP.md` — Ready-to-copy tool schemas for Google Gemini, Anthropic Claude, OpenAI, and Ollama.
+- `test_module.py` — Full unit test suite.
+- `pyproject.toml` — Standard packaging configuration.
+
+## 7. Model-Agnostic Agent Integration
+Deus VectorMesh is 100% model-agnostic. It can be invoked as a tool by any LLM. See [`AGENT_SETUP.md`](./AGENT_SETUP.md) for full JSON schemas and agent invocation code.
+
+## 8. Connections and Requirements
+- Python 3.9 or higher (standard library only).
+- Memory footprint: ~15MB baseline. Zero network sockets required.
+
+## 9. License and Contribution Information
+Licensed under the permissive [MIT License](./LICENSE). Copyright © Deus Intus Ltd.
 
 ---
 
-## ⏱️ Benchmark
+## 🛡️ Intellectual Property & Statutory UK Trade Mark Notice
 
-Tested on Apple Silicon Unified Memory Architecture (M2):
-- **Insert Latency:** `0.002 ms` per vector
-- **p99 Query Latency (10k vectors):** `0.48 ms`
-- **External Network Calls:** `0`
-- **Cloud Egress Fees:** `£0.00`
-
----
-
-## 💼 Need Distributed Enterprise Scale?
-
-While `deus-vectormesh` is a lightweight, zero-dependency local primitive for individual developers and agents, **Deus Intus Ltd** provides the **Deus VectorMesh™ Sovereign Enterprise Edition**:
-
-| Feature | Open-Source (`deus-vectormesh`) | Sovereign Enterprise Edition |
-|---|:---:|:---:|
-| **Runtime** | Single-Machine In-Memory | Multi-Node UMA Sharding (800 GB/s) |
-| **Max Scale** | 100k Vectors | 100 Million+ Vectors |
-| **Persistence** | In-Memory / File Dump | Merkle-Tree Cryptographic Audit Ledger |
-| **Security** | Process-Isolated | Air-Gapped Byzantine Consensus (PBFT) |
-| **Cost Model** | **Free / MIT Open Source** | **£18,000 One-Time Perpetual Buyout** |
-| **Comparison** | Replaces SQLite vector extensions | **Eliminates £36,000/yr Pinecone & AWS OpenSearch** |
-
-👉 **[Explore Sovereign Enterprise Licensing & Case Studies](https://deusintus.co.uk/solutions/vectormesh)**
-
----
-
-## 📜 License
-MIT License. Copyright (c) 2026 Deus Intus Ltd (UK Company No. 17209569).
+- **Registered UK Trade Mark:** `DEUS INTUS®` is a registered trade mark of **Deus Intus Ltd** in the United Kingdom under **UK Trade Mark No. UK00004416539**. All rights reserved.
+- **Corporate Registration:** Deus Intus Ltd is a company registered in England and Wales (Company No. `17209569`), Registered Office: `66 Paul Street, London, EC2A 4NA, United Kingdom`.
+- **Statutory IP Architecture:** Software primitives synthesized by Deus Intus combine 20-year statutory public-domain algorithmic cores with modern permissive runtimes into zero-dependency, model-agnostic, sovereign software modules.
+- **Support & Inquiries:** Official support at [`support@deusintus.com`](mailto:support@deusintus.com).
