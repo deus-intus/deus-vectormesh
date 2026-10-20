@@ -19,7 +19,7 @@
 
 # ⚡ Deus VectorMesh (`deus-vectormesh`)
 
-> **Zero-dependency, local in-memory vector database based on statutory public domain Kademlia DHT routing.**
+> **Zero-dependency, local in-memory vector store that hash-partitions vectors across shards and runs exact cosine-similarity top-k search.**
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-0A57D6.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-33CFFF.svg)](https://opensource.org/licenses/MIT)
@@ -30,7 +30,7 @@
 ---
 
 ## 1. What This Is
-Deus VectorMesh is a high-velocity, in-memory vector database implemented entirely in pure Python standard library. It requires zero third-party packages, zero C-extensions, and zero cloud API keys, providing sub-millisecond semantic search and vector routing on any machine.
+Deus VectorMesh is a lightweight, in-memory vector store implemented entirely in pure Python standard library. It requires zero third-party packages, zero C-extensions, and zero cloud API keys. Vectors are hash-partitioned across in-memory shards (`hash(key) % num_shards`), and search performs an **exact brute-force cosine-similarity scan** across all shards to return the top-k matches — fast enough to feel instant for small local collections, with no index build step.
 
 ## 2. Who It Is For
 - **AI Agent Engineers:** Integrating local vector memory into autonomous agents with zero external pip dependencies.
@@ -42,15 +42,23 @@ Deus VectorMesh is a high-velocity, in-memory vector database implemented entire
 
 ## 4. What Works Now vs Planned
 ### What Works Now:
-- Pure Python vector indexing and exact cosine similarity calculation.
-- Sub-millisecond top-$k$ nearest neighbor retrieval.
-- Arbitrary document metadata attachment and payload filtering.
+- Pure Python vector storage with hash-partitioning across in-memory shards.
+- Exact (brute-force) cosine-similarity top-$k$ retrieval — sub-millisecond for small local collections.
+- Arbitrary document metadata attachment per vector.
+- Included `xor_distance` helper on the node class (a Kademlia-style XOR metric utility; **not** used for insert or search routing).
 - 1-Click quickstart execution via `python3 quickstart.py`.
 - Interactive Jupyter Notebook walkthrough in [`walkthrough.ipynb`](./walkthrough.ipynb).
 - Universal model-agnostic agent schemas in [`AGENT_SETUP.md`](./AGENT_SETUP.md).
 
+### Scope / Honest Limitations:
+- Search is **exact and O(n)**: every query scans all stored vectors across all shards and sorts. This is not an approximate-nearest-neighbor (ANN) index (no HNSW, IVF, or quantization).
+- Sharding is **hash-partitioning for storage distribution only** — it is not a Kademlia DHT. There is no k-bucket routing, DHT lookup, or peer-to-peer network; the `xor_distance` method is an included helper and is never invoked by `insert` or `search`.
+- Everything runs in a single process, in memory. No persistence and no network sockets.
+- Best suited to small-to-medium local collections; for large corpora or latency-critical workloads, use a dedicated ANN vector database.
+
 ### Planned:
 - Persistent disk-backed append log serialization.
+- Optional approximate-nearest-neighbor index for larger collections.
 
 ## 5. How to View or Use It (30-Second Quickstart)
 No installation required! Simply clone and run:
