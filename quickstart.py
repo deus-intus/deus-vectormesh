@@ -10,9 +10,9 @@ def main():
     print("⚡ Deus VectorMesh — Pure Python In-Memory Vector Database")
     print("=" * 60)
 
-    # 1. Initialize the vector mesh (dimension=3 for demonstration)
-    mesh = DeusVectorMesh(dim=3)
-    print("✓ Initialized DeusVectorMesh (dim=3, zero dependencies)")
+    # 1. Initialize the vector mesh (4 hash-routed shards, zero dependencies)
+    mesh = DeusVectorMesh(num_shards=4)
+    print(f"✓ Initialized DeusVectorMesh (shards={len(mesh.shards)}, zero dependencies)")
 
     # 2. Insert sample document vectors
     documents = [
@@ -23,19 +23,19 @@ def main():
     ]
 
     for doc_id, vec, meta in documents:
-        mesh.insert(doc_id, vec, meta)
-        print(f"  + Indexed: {doc_id} -> '{meta['title']}'")
+        shard_id = mesh.insert(doc_id, vec, meta)
+        print(f"  + Indexed: {doc_id} -> '{meta['title']}' (shard {shard_id})")
 
-    print(f"\n✓ Total vectors indexed: {mesh.count()}")
+    print(f"\n✓ Total vectors indexed: {len(documents)}")
 
     # 3. Perform a semantic nearest-neighbor query
     query_vector = [0.92, 0.06, 0.04]  # Close to science docs
     print(f"\n🔍 Querying with vector: {query_vector}")
-    results = mesh.query(query_vector, top_k=2)
+    results = mesh.search(query_vector, top_k=2)
 
     print("\nTop Matches:")
-    for rank, match in enumerate(results, 1):
-        print(f"  {rank}. [{match['score']:.4f}] {match['id']} — {match['metadata']['title']} ({match['metadata']['category']})")
+    for rank, (vid, score, meta) in enumerate(results, 1):
+        print(f"  {rank}. [{score:.4f}] {vid} — {meta['title']} ({meta['category']})")
 
     print("\n✓ Execution completed successfully in pure Python standard library.")
 
